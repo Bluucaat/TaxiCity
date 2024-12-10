@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     public float timeRemaining = 0;
     public bool timeIsRunning;
     public bool gameover = false;
+    public bool checkPointNotFirst = false;
 
 
     public void Start()
@@ -72,7 +73,9 @@ public class GameManager : MonoBehaviour
     {
         if(GameObject.FindGameObjectWithTag("CheckPoint") == null)
         {
-            checkPointSE.Play();
+            if(checkPointNotFirst){
+                checkPointSE.Play();
+            }
             GenerateCheckpoint();
         }
         bool isColliding = player.GetComponent<Player>().getColliding();
@@ -100,8 +103,10 @@ public class GameManager : MonoBehaviour
         currentCoords = coordinatesChoice;
         GameObject newCheckpoint = Instantiate(checkPointPrefab, coordArray[0][coordinatesChoice], Quaternion.identity);
         newCheckpoint.transform.rotation = Quaternion.Euler(coordArray[1][coordinatesChoice]);
+        
         if ((checkPointCount % 2 == 0)) {
             if(checkPointCount > 0)
+                checkPointNotFirst = true;
             {
                 currentScore += 30;
             }
