@@ -48,8 +48,8 @@
 ---
 
 ## Requirements
-- **Unity Version**: This project was built with **Unity Editor 2022.3.26f1**. Ensure you're using this version or later for optimal compatibility.
-- **Environment**: Windows/macOS/Linux.
+- **Unity**: This project was built with **Unity Editor 2022.3.26f1**. Newer editors might not work (Unity will warn you when you import the project).
+- **Compatible OS**: Windows/macOS/Linux.
 
 ---
 
