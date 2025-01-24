@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         checkPointSE = GetComponent<AudioSource>();
-        index = PlayerPrefs.GetInt("carIndex"); // Get the selected car name
+        index = PlayerPrefs.GetInt("carIndex");
         GameObject carPrefab = Instantiate(cars[index], new Vector3(60.2f, 0.2f, 15.85f), Quaternion.identity);
 
         player = GameObject.FindGameObjectWithTag("Player");
@@ -51,7 +51,6 @@ public class GameManager : MonoBehaviour
         { 
         yield return new WaitForSeconds(delay);
 
-        // Return to the main menu scene
         SceneManager.LoadScene("Menu");
     }
     IEnumerator Timer()
@@ -104,17 +103,16 @@ public class GameManager : MonoBehaviour
         GameObject newCheckpoint = Instantiate(checkPointPrefab, coordArray[0][coordinatesChoice], Quaternion.identity);
         newCheckpoint.transform.rotation = Quaternion.Euler(coordArray[1][coordinatesChoice]);
         
-        if ((checkPointCount % 2 == 0)) {
-            if(checkPointCount > 0)
-                checkPointNotFirst = true;
-            {
-                currentScore += 30;
-            }
-            if (currentScore >= goalScore)
-            {
-                scoreText.color = Color.green;
-                GameOver(true);
-            }
+        if (checkPointCount > 0 && (checkPointCount % 2 == 0))
+{
+    checkPointNotFirst = true;
+    currentScore += 30;
+
+    if (currentScore >= goalScore)
+    {
+        scoreText.color = Color.green;
+        GameOver(true);
+    }
             
             scoreText.SetText("Current Score: {0}/{1}", currentScore, goalScore);
             characterPrefabs = GameObject.FindGameObjectsWithTag("NPC");
